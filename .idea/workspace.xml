@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="808cd660-b88e-4517-b11f-2c606b231eb4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/WebSocketMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/RabbitMqConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/workQueues/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workQueues/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/workQueues/NewTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workQueues/NewTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +157,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582137841308</updated>
       <workItem from="1582137846494" duration="14900000" />
-      <workItem from="1582213674770" duration="10449000" />
+      <workItem from="1582213674770" duration="12408000" />
     </task>
     <servers />
   </component>
@@ -174,6 +174,14 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582147549769" />
+    <state x="2685" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1582235405015">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2685" y="221" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582235405015" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1582236155047">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1582236155047" />
     <state width="1877" height="241" key="GridCell.Tab.0.bottom" timestamp="1582234517869">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
