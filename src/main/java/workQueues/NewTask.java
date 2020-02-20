@@ -1,10 +1,9 @@
 package workQueues;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 import config.RabbitMqConfig;
+import service.WebSocketService;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,18 +14,12 @@ public class NewTask {
     private static Random random = new Random();
 
     public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        WebSocketService webSocketService = new WebSocketService();
 
-        try (
-            Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel();
-        ) {
-            channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable, false, false, null);
+        final Channel channel = webSocketService.newChannel(RabbitMqConfig.TASK_QUEUE_NAME);
 
-            for (int i = 0; i < 10; i++) {
-                publishMessage(channel, i);
-            }
+        for (int i = 0; i < 10; i++) {
+            publishMessage(channel, i);
         }
     }
 

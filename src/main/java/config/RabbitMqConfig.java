@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 
+    public static final String hostLocation = "localhost";
+
     public static final String HELLO_QUEUE_NAME = "hello";
     public static final String TASK_QUEUE_NAME = "task_queue";
 

@@ -1,10 +1,9 @@
 package workQueues;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import config.RabbitMqConfig;
+import service.WebSocketService;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
@@ -14,16 +13,10 @@ public class Worker {
     private static Random random = new Random();
 
     public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        WebSocketService webSocketService = new WebSocketService();
 
-        final Connection connection = factory.newConnection();
-        final Channel channel = connection.createChannel();
-
-        channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable, false, false, null);
+        final Channel channel = webSocketService.newWorkerChannel(RabbitMqConfig.TASK_QUEUE_NAME);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
-        channel.basicQos(RabbitMqConfig.prefetchCount);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
