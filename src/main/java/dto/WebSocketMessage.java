@@ -1,7 +1,5 @@
 package dto;
 
-import com.rabbitmq.client.AMQP;
-
 import java.nio.charset.StandardCharsets;
 
 public class WebSocketMessage {

@@ -33,7 +33,7 @@ public class WebSocketService {
     public void publishMessage(Channel channel, WebSocketMessage webSocketMessage) throws IOException {
         channel.basicPublish("",
                              webSocketMessage.getQueueName(),
-                             MessageProperties.PERSISTENT_TEXT_PLAIN,
+                             RabbitMqConfig.messageProperties,
                              webSocketMessage.getMessage());
     }
 }

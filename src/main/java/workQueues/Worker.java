@@ -24,7 +24,7 @@ public class Worker {
             System.out.println(" [+] Received '" + message + "'");
             try {
                 doWork(message);
-                System.out.println(" [x] Done");
+                System.out.println(" [-] Done");
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
