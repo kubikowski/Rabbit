@@ -9,10 +9,10 @@ import config.RabbitMqConfig;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class NewTask {
+
+    private static Random random = new Random();
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
@@ -24,17 +24,15 @@ public class NewTask {
         ) {
             channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, true, false, false, null);
 
-            Random random = new Random();
             for (int i = 0; i < 10; i++) {
-                publishMessage(channel, random.nextInt(10));
+                publishMessage(channel, i);
             }
         }
     }
 
-    private static void publishMessage(Channel channel, Integer secondsOfWork) throws IOException {
-        String message = Stream.generate(String::new)
-                               .limit(secondsOfWork + 1)
-                               .collect(Collectors.joining("."));
+    private static void publishMessage(Channel channel, int messageNumber) throws IOException {
+        String message = messageNumber + ".".repeat(random.nextInt(10));
+
         channel.basicPublish("",
                              RabbitMqConfig.TASK_QUEUE_NAME,
                              MessageProperties.PERSISTENT_TEXT_PLAIN,
