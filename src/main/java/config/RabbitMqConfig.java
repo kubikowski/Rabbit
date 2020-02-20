@@ -8,5 +8,10 @@ public class RabbitMqConfig {
     public static final String HELLO_QUEUE_NAME = "hello";
     public static final String TASK_QUEUE_NAME = "task_queue";
 
-    public static final boolean autoAck = false;
+    // Queue Parameters
+    public static final boolean durable = true;     // enqueued messages will write to disk, in case Rabbit goes down
+
+    // Worker Parameters
+    public static final int prefetchCount = 1;      // workers only accept only one unacked message at a time
+    public static final boolean autoAck = false;    // Manual ack on process completion
 }

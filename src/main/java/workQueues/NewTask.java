@@ -22,7 +22,7 @@ public class NewTask {
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();
         ) {
-            channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, true, false, false, null);
+            channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable, false, false, null);
 
             for (int i = 0; i < 10; i++) {
                 publishMessage(channel, i);

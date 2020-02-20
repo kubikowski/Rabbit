@@ -20,10 +20,10 @@ public class Worker {
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
 
-        channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, true, false, false, null);
+        channel.queueDeclare(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
-        channel.basicQos(1);    // accept only one unacked message at a time
+        channel.basicQos(RabbitMqConfig.prefetchCount);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
