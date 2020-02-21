@@ -5,6 +5,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import config.RabbitMqConfig;
 import webSocket.ConsumerType;
+import webSocket.ProducerType;
 import webSocket.QueueType;
 import webSocket.WebSocketMessage;
 
@@ -34,11 +35,11 @@ public class WebSocketService {
         return channel;
     }
 
-    public void publishMessage(WebSocketMessage webSocketMessage) throws IOException {
+    public void publishMessage(WebSocketMessage webSocketMessage, ProducerType producerType) throws IOException {
         webSocketMessage.getChannel()
                         .basicPublish("",
                                       webSocketMessage.getQueueName(),
-                                      RabbitMqConfig.messageProperties,
+                                      producerType.getMessageProperties(),
                                       webSocketMessage.getMessage());
     }
 }

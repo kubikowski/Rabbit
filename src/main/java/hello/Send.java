@@ -3,6 +3,7 @@ package hello;
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
+import webSocket.WebSocketMessage;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +17,7 @@ public class Send {
         final Channel channel = webSocketService.newChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.nonDurable);
 
         String message = "Hello Java!";
-        channel.basicPublish("", RabbitMqConfig.HELLO_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
+        webSocketService.publishMessage(WebSocketMessage.from(channel, RabbitMqConfig.HELLO_QUEUE_NAME, message), RabbitMqConfig.basic);
         System.out.println(" [x] Sent '" + message + "'");
     }
 }

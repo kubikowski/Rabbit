@@ -20,7 +20,7 @@ public class NewTask {
         for (int i = 0; i < 10; i++) {
             String message = i + ".".repeat(random.nextInt(10));
 
-            webSocketService.publishMessage(WebSocketMessage.from(channel, RabbitMqConfig.TASK_QUEUE_NAME, message));
+            webSocketService.publishMessage(WebSocketMessage.from(channel, RabbitMqConfig.TASK_QUEUE_NAME, message), RabbitMqConfig.persistent);
             System.out.println(" [x] Sent '" + message + "'");
         }
     }

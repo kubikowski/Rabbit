@@ -34,6 +34,7 @@ public class Worker {
                 channel.abort();
             }
         };
+
         channel.basicConsume(RabbitMqConfig.TASK_QUEUE_NAME, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
     }
 
