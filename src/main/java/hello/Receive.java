@@ -5,11 +5,13 @@ import com.rabbitmq.client.DeliverCallback;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeoutException;
 
 public class Receive {
 
-    public static void main(String[] argv) throws Exception {
+    public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
         final Channel channel = webSocketService.newChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.nonDurable);

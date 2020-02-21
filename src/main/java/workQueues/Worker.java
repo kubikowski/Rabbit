@@ -6,14 +6,16 @@ import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ConsumerType;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
+import java.util.concurrent.TimeoutException;
 
 public class Worker {
 
     private static Random random = new Random();
 
-    public static void main(String[] argv) throws Exception {
+    public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
         ConsumerType consumerType = RabbitMqConfig.worker;
