@@ -7,9 +7,9 @@ import config.RabbitMqConfig;
 import webSocket.ConsumerType;
 import webSocket.ProducerType;
 import webSocket.QueueType;
-import webSocket.WebSocketMessage;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class WebSocketService {
@@ -35,11 +35,10 @@ public class WebSocketService {
         return channel;
     }
 
-    public void publishMessage(WebSocketMessage webSocketMessage, ProducerType producerType) throws IOException {
-        webSocketMessage.getChannel()
-                        .basicPublish("",
-                                      webSocketMessage.getQueueName(),
-                                      producerType.getMessageProperties(),
-                                      webSocketMessage.getMessage());
+    public void publishMessage(Channel channel, String queueName, ProducerType producerType, String message) throws IOException {
+        channel.basicPublish("",
+                             queueName,
+                             producerType.getMessageProperties(),
+                             message.getBytes(StandardCharsets.UTF_8));
     }
 }

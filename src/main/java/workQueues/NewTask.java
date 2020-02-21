@@ -3,7 +3,6 @@ package workQueues;
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
-import webSocket.WebSocketMessage;
 
 import java.io.IOException;
 import java.util.Random;
@@ -20,7 +19,7 @@ public class NewTask {
         for (int i = 0; i < 10; i++) {
             String message = i + ".".repeat(random.nextInt(10));
 
-            webSocketService.publishMessage(WebSocketMessage.from(channel, RabbitMqConfig.TASK_QUEUE_NAME, message), RabbitMqConfig.persistent);
+            webSocketService.publishMessage(channel, RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.persistent, message);
             System.out.println(" [x] Sent '" + message + "'");
         }
     }

@@ -1,6 +1,5 @@
 package config;
 
-import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
 import webSocket.ConsumerType;
