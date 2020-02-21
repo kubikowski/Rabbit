@@ -1,9 +1,6 @@
 package service;
 
-import com.rabbitmq.client.BuiltinExchangeType;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
 import config.RabbitMqConfig;
 import webSocket.ConsumerType;
 import webSocket.ProducerType;
@@ -52,4 +49,9 @@ public class WebSocketService {
                              producerType.getMessageProperties(),
                              message.getBytes(StandardCharsets.UTF_8));
     }
+
+    public DeliverCallback defaultDeliverCallback = (consumerTag, delivery) -> {
+        String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+        System.out.println(" [x] Received '" + message + "'");
+    };
 }

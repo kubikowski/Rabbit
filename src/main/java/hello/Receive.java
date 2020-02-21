@@ -18,13 +18,8 @@ public class Receive {
         ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
 
         final Channel channel = webSocketService.newQueueChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
+
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
-        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + message + "'");
-        };
-
-        channel.basicConsume(RabbitMqConfig.HELLO_QUEUE_NAME, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
+        channel.basicConsume(RabbitMqConfig.HELLO_QUEUE_NAME, consumerType.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
     }
 }
