@@ -2,13 +2,11 @@ package publishSubscribe;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DeliverCallback;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ConsumerType;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class ReceiveLogs {

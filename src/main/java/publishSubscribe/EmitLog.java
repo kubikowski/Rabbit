@@ -6,7 +6,6 @@ import config.RabbitMqConfig;
 import service.WebSocketService;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class EmitLog {
