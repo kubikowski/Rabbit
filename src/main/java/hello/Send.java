@@ -14,17 +14,15 @@ public class Send {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
+        final String exchangeName = RabbitMqConfig.NULL_EXCHANGE_NAME;
         final String queueName = RabbitMqConfig.HELLO_QUEUE_NAME;
         final QueueType queueType = RabbitMqConfig.NON_DURABLE_QUEUE;
         final ProducerType producerType = RabbitMqConfig.BASIC_PRODUCER;
+
         final Channel channel = webSocketService.newQueueChannel(queueName, queueType);
 
         String message = "Hello Java!";
-        webSocketService.publishMessage(channel,
-                                        RabbitMqConfig.NULL_EXCHANGE_NAME,
-                                        queueName,
-                                        producerType,
-                                        message);
+        webSocketService.publishMessage(channel, exchangeName, queueName, producerType, message);
         System.out.println(" [x] Sent '" + message + "'");
     }
 }

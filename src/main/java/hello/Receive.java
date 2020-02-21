@@ -17,6 +17,7 @@ public class Receive {
         final String queueName = RabbitMqConfig.HELLO_QUEUE_NAME;
         final QueueType queueType = RabbitMqConfig.NON_DURABLE_QUEUE;
         final ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
+
         final Channel channel = webSocketService.newQueueChannel(queueName, queueType);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
