@@ -1,5 +1,6 @@
 package service;
 
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -29,6 +30,13 @@ public class WebSocketService {
         return channel;
     }
 
+    public Channel newExchangeChannel(String exchangeName, BuiltinExchangeType builtinExchangeType) throws IOException, TimeoutException {
+        Channel channel = newChannel();
+
+        channel.exchangeDeclare(exchangeName, builtinExchangeType);
+        return channel;
+    }
+
     public Channel newConsumerChannel(String queueName, QueueType queueType, ConsumerType consumerType) throws IOException, TimeoutException {
         Channel channel = newQueueChannel(queueName, queueType);
 
@@ -38,8 +46,8 @@ public class WebSocketService {
         return channel;
     }
 
-    public void publishMessage(Channel channel, String queueName, ProducerType producerType, String message) throws IOException {
-        channel.basicPublish("",
+    public void publishMessage(Channel channel, String exchangeName, String queueName, ProducerType producerType, String message) throws IOException {
+        channel.basicPublish(exchangeName,
                              queueName,
                              producerType.getMessageProperties(),
                              message.getBytes(StandardCharsets.UTF_8));

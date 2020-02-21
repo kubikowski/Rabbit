@@ -19,7 +19,11 @@ public class NewTask {
         for (int i = 0; i < 10; i++) {
             String message = i + ".".repeat(random.nextInt(10));
 
-            webSocketService.publishMessage(channel, RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.PERSISTENT_PRODUCER, message);
+            webSocketService.publishMessage(channel,
+                                            RabbitMqConfig.NULL_EXCHANGE_NAME,
+                                            RabbitMqConfig.TASK_QUEUE_NAME,
+                                            RabbitMqConfig.PERSISTENT_PRODUCER,
+                                            message);
             System.out.println(" [x] Sent '" + message + "'");
         }
     }

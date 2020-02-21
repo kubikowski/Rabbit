@@ -11,8 +11,12 @@ public class RabbitMqConfig {
 
     public static final String HOST_LOCATION = "localhost";
 
+    public static final String NULL_ROUTING_KEY = "hello";
     public static final String HELLO_QUEUE_NAME = "hello";
     public static final String TASK_QUEUE_NAME = "task_queue";
+
+    public static final String NULL_EXCHANGE_NAME = "";
+    public static final String LOGS_EXCHANGE_NAME = "logs";
 
     // Queue Type Parameters
     public static final QueueType NON_DURABLE_QUEUE =   new QueueType(false, false, false, null);

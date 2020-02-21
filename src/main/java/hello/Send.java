@@ -15,7 +15,11 @@ public class Send {
         final Channel channel = webSocketService.newQueueChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
 
         String message = "Hello Java!";
-        webSocketService.publishMessage(channel, RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.BASIC_PRODUCER, message);
+        webSocketService.publishMessage(channel,
+                                        RabbitMqConfig.NULL_EXCHANGE_NAME,
+                                        RabbitMqConfig.HELLO_QUEUE_NAME,
+                                        RabbitMqConfig.BASIC_PRODUCER,
+                                        message);
         System.out.println(" [x] Sent '" + message + "'");
     }
 }

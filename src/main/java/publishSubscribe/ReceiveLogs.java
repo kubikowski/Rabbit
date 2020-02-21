@@ -1,29 +1,35 @@
 package publishSubscribe;
 
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import config.RabbitMqConfig;
+import service.WebSocketService;
+import webSocket.ConsumerType;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeoutException;
 
 public class ReceiveLogs {
-    private static final String EXCHANGE_NAME = "logs";
 
-    public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+    public static void main(String[] argv) throws IOException, TimeoutException {
+        WebSocketService webSocketService = new WebSocketService();
 
-        channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+        ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
+
+        final Channel channel = webSocketService.newExchangeChannel(RabbitMqConfig.LOGS_EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
+
         String queueName = channel.queueDeclare().getQueue();
-        channel.queueBind(queueName, EXCHANGE_NAME, "");
+        channel.queueBind(queueName, RabbitMqConfig.LOGS_EXCHANGE_NAME, RabbitMqConfig.NULL_ROUTING_KEY);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), "UTF-8");
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");
         };
-        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+
+        channel.basicConsume(queueName, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
     }
 }
