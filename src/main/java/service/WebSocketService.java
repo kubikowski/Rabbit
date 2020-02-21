@@ -16,7 +16,7 @@ public class WebSocketService {
 
     public Channel newChannel(String queueName, QueueType queueType) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(RabbitMqConfig.hostLocation);
+        factory.setHost(RabbitMqConfig.HOST_LOCATION);
 
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();

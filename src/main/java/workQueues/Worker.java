@@ -18,9 +18,9 @@ public class Worker {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        ConsumerType consumerType = RabbitMqConfig.worker;
+        ConsumerType consumerType = RabbitMqConfig.WORKER_CONSUMER;
 
-        final Channel channel = webSocketService.newConsumerChannel(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable, consumerType);
+        final Channel channel = webSocketService.newConsumerChannel(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.DURABLE_QUEUE, consumerType);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
