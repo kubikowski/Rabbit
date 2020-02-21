@@ -11,7 +11,8 @@ public class RabbitMqConfig {
 
     public static final String HOST_LOCATION = "localhost";
 
-    public static final String NULL_ROUTING_KEY = "hello";
+    public static final String NULL_ROUTING_KEY = "";
+
     public static final String HELLO_QUEUE_NAME = "hello";
     public static final String TASK_QUEUE_NAME = "task_queue";
 
