@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="808cd660-b88e-4517-b11f-2c606b231eb4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/RabbitMqConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/Send.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webSocket/WebSocketMessage.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/workQueues/NewTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workQueues/NewTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/workQueues/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workQueues/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +156,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582137841308</updated>
       <workItem from="1582137846494" duration="14900000" />
-      <workItem from="1582213674770" duration="21016000" />
+      <workItem from="1582213674770" duration="21173000" />
     </task>
     <servers />
   </component>

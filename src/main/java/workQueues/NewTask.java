@@ -13,8 +13,8 @@ public class NewTask {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        final Random random = new Random();
         final Channel channel = webSocketService.newChannel(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable);
+        final Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
             String message = i + ".".repeat(random.nextInt(10));

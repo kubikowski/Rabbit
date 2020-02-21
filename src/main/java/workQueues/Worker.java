@@ -23,8 +23,8 @@ public class Worker {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-
             System.out.println(" [+] Received '" + message + "'");
+
             try {
                 doWork(message);
                 System.out.println(" [-] Done");
