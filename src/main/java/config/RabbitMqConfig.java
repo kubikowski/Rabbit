@@ -3,6 +3,7 @@ package config;
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
+import service.ConsumerType;
 
 @Configuration
 public class RabbitMqConfig {
@@ -18,7 +19,7 @@ public class RabbitMqConfig {
     // Producer Parameters
     public static final BasicProperties messageProperties = MessageProperties.PERSISTENT_TEXT_PLAIN;    // Messages will persist to Disk
 
-    // Worker Parameters
-    public static final int prefetchCount = 1;      // workers only accept only one unacked message at a time
-    public static final boolean autoAck = false;    // Manual ack on process completion
+    // Consumer Parameters
+    public static final ConsumerType fireAndForget = new ConsumerType(null, true);
+    public static final ConsumerType worker = new ConsumerType(1, false);
 }

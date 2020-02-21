@@ -3,6 +3,7 @@ package workQueues;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import config.RabbitMqConfig;
+import service.ConsumerType;
 import service.WebSocketService;
 
 import java.nio.charset.StandardCharsets;
@@ -15,7 +16,9 @@ public class Worker {
     public static void main(String[] argv) throws Exception {
         WebSocketService webSocketService = new WebSocketService();
 
-        final Channel channel = webSocketService.newWorkerChannel(RabbitMqConfig.TASK_QUEUE_NAME);
+        ConsumerType consumerType = RabbitMqConfig.worker;
+
+        final Channel channel = webSocketService.newConsumerChannel(RabbitMqConfig.TASK_QUEUE_NAME, consumerType);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
@@ -31,7 +34,7 @@ public class Worker {
                 channel.abort();
             }
         };
-        channel.basicConsume(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.autoAck, deliverCallback, consumerTag -> { });
+        channel.basicConsume(RabbitMqConfig.TASK_QUEUE_NAME, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
     }
 
     private static void doWork(String task) throws Exception {

@@ -3,7 +3,6 @@ package service;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.MessageProperties;
 import config.RabbitMqConfig;
 import dto.WebSocketMessage;
 
@@ -23,17 +22,20 @@ public class WebSocketService {
         return channel;
     }
 
-    public Channel newWorkerChannel(String queueName) throws IOException, TimeoutException {
+    public Channel newConsumerChannel(String queueName, ConsumerType consumerType) throws IOException, TimeoutException {
         Channel channel = newChannel(queueName);
-        channel.basicQos(RabbitMqConfig.prefetchCount);
+
+        if (consumerType.getPrefetchCount() != null) {
+            channel.basicQos(consumerType.getPrefetchCount());
+        }
 
         return channel;
     }
 
-    public void publishMessage(Channel channel, WebSocketMessage webSocketMessage) throws IOException {
-        channel.basicPublish("",
-                             webSocketMessage.getQueueName(),
-                             RabbitMqConfig.messageProperties,
-                             webSocketMessage.getMessage());
+    public void publishMessage(WebSocketMessage webSocketMessage) throws IOException {
+        webSocketMessage.getChannel().basicPublish("",
+                                                   webSocketMessage.getQueueName(),
+                                                   RabbitMqConfig.messageProperties,
+                                                   webSocketMessage.getMessage());
     }
 }
