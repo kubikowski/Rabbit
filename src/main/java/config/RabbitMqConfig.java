@@ -15,8 +15,8 @@ public class RabbitMqConfig {
     public static final String TASK_QUEUE_NAME = "task_queue";
 
     // Queue Type Parameters
-    public static final QueueType nonDurable = new QueueType(false);
-    public static final QueueType durable = new QueueType(true);
+    public static final QueueType nonDurable = new QueueType(false, false, false, null);
+    public static final QueueType durable = new QueueType(true, false, false, null);
 
     // Producer Type Parameters
     public static final ProducerType basic = new ProducerType(MessageProperties.MINIMAL_BASIC);
