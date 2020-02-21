@@ -1,4 +1,4 @@
-package dto;
+package webSocket;
 
 import com.rabbitmq.client.Channel;
 

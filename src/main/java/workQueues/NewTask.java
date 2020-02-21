@@ -2,7 +2,7 @@ package workQueues;
 
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
-import dto.WebSocketMessage;
+import webSocket.WebSocketMessage;
 import service.WebSocketService;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package service;
+package webSocket;
 
 public class ConsumerType {
 

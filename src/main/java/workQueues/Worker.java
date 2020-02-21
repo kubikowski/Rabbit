@@ -3,7 +3,7 @@ package workQueues;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import config.RabbitMqConfig;
-import service.ConsumerType;
+import webSocket.ConsumerType;
 import service.WebSocketService;
 
 import java.nio.charset.StandardCharsets;

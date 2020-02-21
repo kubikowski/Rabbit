@@ -4,7 +4,8 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import config.RabbitMqConfig;
-import dto.WebSocketMessage;
+import webSocket.ConsumerType;
+import webSocket.WebSocketMessage;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -33,9 +34,10 @@ public class WebSocketService {
     }
 
     public void publishMessage(WebSocketMessage webSocketMessage) throws IOException {
-        webSocketMessage.getChannel().basicPublish("",
-                                                   webSocketMessage.getQueueName(),
-                                                   RabbitMqConfig.messageProperties,
-                                                   webSocketMessage.getMessage());
+        webSocketMessage.getChannel()
+                        .basicPublish("",
+                                      webSocketMessage.getQueueName(),
+                                      RabbitMqConfig.messageProperties,
+                                      webSocketMessage.getMessage());
     }
 }
