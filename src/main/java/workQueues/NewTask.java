@@ -2,8 +2,8 @@ package workQueues;
 
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
-import webSocket.WebSocketMessage;
 import service.WebSocketService;
+import webSocket.WebSocketMessage;
 
 import java.io.IOException;
 import java.util.Random;
@@ -15,7 +15,7 @@ public class NewTask {
         WebSocketService webSocketService = new WebSocketService();
 
         final Random random = new Random();
-        final Channel channel = webSocketService.newChannel(RabbitMqConfig.TASK_QUEUE_NAME);
+        final Channel channel = webSocketService.newChannel(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.durable);
 
         for (int i = 0; i < 10; i++) {
             String message = i + ".".repeat(random.nextInt(10));

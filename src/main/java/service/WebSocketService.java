@@ -5,6 +5,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import config.RabbitMqConfig;
 import webSocket.ConsumerType;
+import webSocket.QueueType;
 import webSocket.WebSocketMessage;
 
 import java.io.IOException;
@@ -12,19 +13,19 @@ import java.util.concurrent.TimeoutException;
 
 public class WebSocketService {
 
-    public Channel newChannel(String queueName) throws IOException, TimeoutException {
+    public Channel newChannel(String queueName, QueueType queueType) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(RabbitMqConfig.hostLocation);
 
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
 
-        channel.queueDeclare(queueName, RabbitMqConfig.durable, false, false, null);
+        channel.queueDeclare(queueName, queueType.isDurable(), false, false, null);
         return channel;
     }
 
-    public Channel newConsumerChannel(String queueName, ConsumerType consumerType) throws IOException, TimeoutException {
-        Channel channel = newChannel(queueName);
+    public Channel newConsumerChannel(String queueName, QueueType queueType, ConsumerType consumerType) throws IOException, TimeoutException {
+        Channel channel = newChannel(queueName, queueType);
 
         if (consumerType.getPrefetchCount() != null) {
             channel.basicQos(consumerType.getPrefetchCount());

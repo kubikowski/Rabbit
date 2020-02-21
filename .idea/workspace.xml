@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="808cd660-b88e-4517-b11f-2c606b231eb4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/webSocket/QueueType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/config/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/RabbitMqConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/WebSocketMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webSocket/WebSocketMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ConsumerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webSocket/ConsumerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/Receive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/Receive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/Send.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/WebSocketService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/workQueues/NewTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workQueues/NewTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/workQueues/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workQueues/Worker.java" afterDir="false" />
@@ -160,7 +161,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582137841308</updated>
       <workItem from="1582137846494" duration="14900000" />
-      <workItem from="1582213674770" duration="17734000" />
+      <workItem from="1582213674770" duration="19562000" />
     </task>
     <servers />
   </component>
@@ -177,34 +178,34 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582147549769" />
-    <state x="2685" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1582301712534">
+    <state x="2685" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1582309886511">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2685" y="221" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582301712534" />
+    <state x="2685" y="221" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582309886511" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1582236155047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1582236155047" />
-    <state width="1877" height="241" key="GridCell.Tab.0.bottom" timestamp="1582237468933">
+    <state width="1877" height="241" key="GridCell.Tab.0.bottom" timestamp="1582310177414">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="241" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1582234517869" />
-    <state width="1877" height="241" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582237468933" />
-    <state width="1877" height="241" key="GridCell.Tab.0.center" timestamp="1582237468933">
+    <state width="1877" height="241" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582310177414" />
+    <state width="1877" height="241" key="GridCell.Tab.0.center" timestamp="1582310177414">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="241" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1582234517869" />
-    <state width="1877" height="241" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582237468933" />
-    <state width="1877" height="241" key="GridCell.Tab.0.left" timestamp="1582237468932">
+    <state width="1877" height="241" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582310177414" />
+    <state width="1877" height="241" key="GridCell.Tab.0.left" timestamp="1582310177414">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="241" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1582234517869" />
-    <state width="1877" height="241" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582237468932" />
-    <state width="1877" height="241" key="GridCell.Tab.0.right" timestamp="1582237468933">
+    <state width="1877" height="241" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582310177414" />
+    <state width="1877" height="241" key="GridCell.Tab.0.right" timestamp="1582310177414">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="241" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1582234517869" />
-    <state width="1877" height="241" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582237468933" />
+    <state width="1877" height="241" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1582310177414" />
     <state x="2410" y="175" key="Maven.ArtifactSearchDialog" timestamp="1582236888137">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

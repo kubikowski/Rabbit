@@ -4,6 +4,7 @@ import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
 import webSocket.ConsumerType;
+import webSocket.QueueType;
 
 @Configuration
 public class RabbitMqConfig {
@@ -14,7 +15,8 @@ public class RabbitMqConfig {
     public static final String TASK_QUEUE_NAME = "task_queue";
 
     // Queue Parameters
-    public static final boolean durable = true;     // enqueued messages will write to disk, in case Rabbit goes down
+    public static final QueueType nonDurable = new QueueType(false);
+    public static final QueueType durable = new QueueType(true);
 
     // Producer Parameters
     public static final BasicProperties messageProperties = MessageProperties.PERSISTENT_TEXT_PLAIN;    // Messages will persist to Disk

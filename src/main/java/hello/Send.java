@@ -1,26 +1,22 @@
 package hello;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import config.RabbitMqConfig;
+import service.WebSocketService;
+
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeoutException;
 
 public class Send {
 
-    public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+    public static void main(String[] argv) throws IOException, TimeoutException {
+        WebSocketService webSocketService = new WebSocketService();
 
-        try (
-            Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel();
-        ) {
-            channel.queueDeclare(RabbitMqConfig.HELLO_QUEUE_NAME, false, false, false, null);
+        final Channel channel = webSocketService.newChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.nonDurable);
 
-            String message = "Hello Java!";
-            channel.basicPublish("", RabbitMqConfig.HELLO_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println(" [x] Sent '" + message + "'");
-        }
+        String message = "Hello Java!";
+        channel.basicPublish("", RabbitMqConfig.HELLO_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
+        System.out.println(" [x] Sent '" + message + "'");
     }
 }
