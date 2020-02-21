@@ -5,6 +5,7 @@ import com.rabbitmq.client.DeliverCallback;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ConsumerType;
+import webSocket.QueueType;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,10 +19,10 @@ public class Worker {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        ConsumerType consumerType = RabbitMqConfig.WORKER_CONSUMER;
-
-        final Channel channel = webSocketService.newConsumerChannel(RabbitMqConfig.TASK_QUEUE_NAME, RabbitMqConfig.DURABLE_QUEUE, consumerType);
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        final String queueName = RabbitMqConfig.TASK_QUEUE_NAME;
+        final QueueType queueType = RabbitMqConfig.DURABLE_QUEUE;
+        final ConsumerType consumerType = RabbitMqConfig.WORKER_CONSUMER;
+        final Channel channel = webSocketService.newConsumerChannel(queueName, queueType, consumerType);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
@@ -37,7 +38,8 @@ public class Worker {
             }
         };
 
-        channel.basicConsume(RabbitMqConfig.TASK_QUEUE_NAME, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        channel.basicConsume(queueName, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
     }
 
     private static void doWork(String task) throws Exception {

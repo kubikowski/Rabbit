@@ -4,6 +4,7 @@ import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ConsumerType;
+import webSocket.QueueType;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -13,11 +14,12 @@ public class Receive {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
-
-        final Channel channel = webSocketService.newQueueChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
+        final String queueName = RabbitMqConfig.HELLO_QUEUE_NAME;
+        final QueueType queueType = RabbitMqConfig.NON_DURABLE_QUEUE;
+        final ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
+        final Channel channel = webSocketService.newQueueChannel(queueName, queueType);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        channel.basicConsume(RabbitMqConfig.HELLO_QUEUE_NAME, consumerType.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
+        channel.basicConsume(queueName, consumerType.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
     }
 }
