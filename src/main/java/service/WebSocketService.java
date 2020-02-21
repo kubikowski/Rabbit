@@ -19,9 +19,7 @@ public class WebSocketService {
         factory.setHost(RabbitMqConfig.HOST_LOCATION);
 
         final Connection connection = factory.newConnection();
-        final Channel channel = connection.createChannel();
-
-        return channel;
+        return connection.createChannel();
     }
 
     public Channel newQueueChannel(String queueName, QueueType queueType) throws IOException, TimeoutException {
@@ -37,7 +35,6 @@ public class WebSocketService {
         if (consumerType.getPrefetchCount() != null) {
             channel.basicQos(consumerType.getPrefetchCount());
         }
-
         return channel;
     }
 
