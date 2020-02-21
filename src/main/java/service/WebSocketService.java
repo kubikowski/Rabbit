@@ -14,19 +14,25 @@ import java.util.concurrent.TimeoutException;
 
 public class WebSocketService {
 
-    public Channel newChannel(String queueName, QueueType queueType) throws IOException, TimeoutException {
+    public Channel newChannel() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(RabbitMqConfig.HOST_LOCATION);
 
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
 
-        channel.queueDeclare(queueName, queueType.isDurable(), false, false, null);
+        return channel;
+    }
+
+    public Channel newQueueChannel(String queueName, QueueType queueType) throws IOException, TimeoutException {
+        Channel channel = newChannel();
+
+        channel.queueDeclare(queueName, queueType.isDurable(), queueType.isExclusive(), queueType.isAutoDelete(), queueType.getArguments());
         return channel;
     }
 
     public Channel newConsumerChannel(String queueName, QueueType queueType, ConsumerType consumerType) throws IOException, TimeoutException {
-        Channel channel = newChannel(queueName, queueType);
+        Channel channel = newQueueChannel(queueName, queueType);
 
         if (consumerType.getPrefetchCount() != null) {
             channel.basicQos(consumerType.getPrefetchCount());

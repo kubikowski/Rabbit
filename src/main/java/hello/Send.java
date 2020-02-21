@@ -12,7 +12,7 @@ public class Send {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        final Channel channel = webSocketService.newChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
+        final Channel channel = webSocketService.newQueueChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
 
         String message = "Hello Java!";
         webSocketService.publishMessage(channel, RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.BASIC_PRODUCER, message);

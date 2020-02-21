@@ -17,7 +17,7 @@ public class Receive {
 
         ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
 
-        final Channel channel = webSocketService.newChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
+        final Channel channel = webSocketService.newQueueChannel(RabbitMqConfig.HELLO_QUEUE_NAME, RabbitMqConfig.NON_DURABLE_QUEUE);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
