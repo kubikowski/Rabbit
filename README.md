@@ -12,3 +12,8 @@
  sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged
  rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged
  ```
+
+ Listing Exchanges and their exchange types:
+ ```
+ sudo rabbitmqctl list_exchanges
+ ```
