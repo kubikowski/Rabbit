@@ -2,7 +2,7 @@ package config;
 
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
-import webSocket.ConsumerType;
+import webSocket.ConsumerParameters;
 import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
@@ -28,6 +28,6 @@ public class RabbitMqConfig {
     public static final ProducerProperties PERSISTENT_PRODUCER =  new ProducerProperties(MessageProperties.PERSISTENT_TEXT_PLAIN);
 
     // Consumer Type Parameters
-    public static final ConsumerType FIRE_AND_FORGET_CONSUMER = new ConsumerType(null, true);
-    public static final ConsumerType WORKER_CONSUMER =          new ConsumerType(1, false);
+    public static final ConsumerParameters FIRE_AND_FORGET_CONSUMER = new ConsumerParameters(null, true);
+    public static final ConsumerParameters WORKER_CONSUMER =          new ConsumerParameters(1, false);
 }

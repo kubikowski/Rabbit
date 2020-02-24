@@ -5,7 +5,7 @@ import com.rabbitmq.client.DeliverCallback;
 import com.rabbitmq.client.Delivery;
 import config.RabbitMqConfig;
 import service.WebSocketService;
-import webSocket.ConsumerType;
+import webSocket.ConsumerParameters;
 import webSocket.QueueProperties;
 
 import java.io.IOException;
@@ -22,9 +22,9 @@ public class Worker {
 
         final String queueName = RabbitMqConfig.TASK_QUEUE_NAME;
         final QueueProperties queueProperties = RabbitMqConfig.DURABLE_QUEUE;
-        final ConsumerType consumerType = RabbitMqConfig.WORKER_CONSUMER;
+        final ConsumerParameters consumerParameters = RabbitMqConfig.WORKER_CONSUMER;
 
-        final Channel channel = webSocketService.newConsumerChannel(queueName, queueProperties, consumerType);
+        final Channel channel = webSocketService.newConsumerChannel(queueName, queueProperties, consumerParameters);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             webSocketService.defaultDeliverCallback.handle(consumerTag, delivery);
@@ -32,7 +32,7 @@ public class Worker {
         };
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        channel.basicConsume(queueName, consumerType.isAutoAck(), deliverCallback, consumerTag -> { });
+        channel.basicConsume(queueName, consumerParameters.isAutoAck(), deliverCallback, consumerTag -> { });
     }
 
     private static void handleWork(Channel channel, Delivery delivery) throws IOException {
