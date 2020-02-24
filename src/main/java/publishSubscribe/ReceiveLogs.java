@@ -4,7 +4,7 @@ import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
-import webSocket.ConsumerParameters;
+import webSocket.ConsumerProperties;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -16,7 +16,7 @@ public class ReceiveLogs {
 
         final String exchangeName = RabbitMqConfig.LOGS_EXCHANGE_NAME;
         final String routingKey = RabbitMqConfig.NULL_ROUTING_KEY;
-        final ConsumerParameters consumerParameters = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
+        final ConsumerProperties consumerProperties = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
 
         final Channel channel = webSocketService.newExchangeChannel(exchangeName, BuiltinExchangeType.FANOUT);
 
@@ -24,6 +24,6 @@ public class ReceiveLogs {
         channel.queueBind(queueName, exchangeName, routingKey);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        channel.basicConsume(queueName, consumerParameters.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
+        channel.basicConsume(queueName, consumerProperties.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
     }
 }

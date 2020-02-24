@@ -2,7 +2,7 @@ package config;
 
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
-import webSocket.ConsumerParameters;
+import webSocket.ConsumerProperties;
 import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
@@ -19,15 +19,15 @@ public class RabbitMqConfig {
     public static final String NULL_EXCHANGE_NAME = "";
     public static final String LOGS_EXCHANGE_NAME = "logs";
 
-    // Queue Type Parameters
+    // Queue Properties
     public static final QueueProperties NON_DURABLE_QUEUE =   new QueueProperties(false, false, false, null);
     public static final QueueProperties DURABLE_QUEUE =       new QueueProperties(true, false, false, null);
 
-    // Producer Type Parameters
+    // Producer Properties
     public static final ProducerProperties BASIC_PRODUCER =       new ProducerProperties(MessageProperties.MINIMAL_BASIC);
     public static final ProducerProperties PERSISTENT_PRODUCER =  new ProducerProperties(MessageProperties.PERSISTENT_TEXT_PLAIN);
 
-    // Consumer Type Parameters
-    public static final ConsumerParameters FIRE_AND_FORGET_CONSUMER = new ConsumerParameters(null, true);
-    public static final ConsumerParameters WORKER_CONSUMER =          new ConsumerParameters(1, false);
+    // Consumer Properties
+    public static final ConsumerProperties FIRE_AND_FORGET_CONSUMER = new ConsumerProperties(null, true);
+    public static final ConsumerProperties WORKER_CONSUMER =          new ConsumerProperties(1, false);
 }

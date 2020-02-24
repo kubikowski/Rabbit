@@ -3,7 +3,7 @@ package hello;
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
-import webSocket.ConsumerParameters;
+import webSocket.ConsumerProperties;
 import webSocket.QueueProperties;
 
 import java.io.IOException;
@@ -16,11 +16,11 @@ public class Receive {
 
         final String queueName = RabbitMqConfig.HELLO_QUEUE_NAME;
         final QueueProperties queueProperties = RabbitMqConfig.NON_DURABLE_QUEUE;
-        final ConsumerParameters consumerParameters = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
+        final ConsumerProperties consumerProperties = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
 
         final Channel channel = webSocketService.newQueueChannel(queueName, queueProperties);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        channel.basicConsume(queueName, consumerParameters.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
+        channel.basicConsume(queueName, consumerProperties.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
     }
 }

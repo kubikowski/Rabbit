@@ -2,7 +2,7 @@ package service;
 
 import com.rabbitmq.client.*;
 import config.RabbitMqConfig;
-import webSocket.ConsumerParameters;
+import webSocket.ConsumerProperties;
 import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
@@ -34,11 +34,11 @@ public class WebSocketService {
         return channel;
     }
 
-    public Channel newConsumerChannel(String queueName, QueueProperties queueProperties, ConsumerParameters consumerParameters) throws IOException, TimeoutException {
+    public Channel newConsumerChannel(String queueName, QueueProperties queueProperties, ConsumerProperties consumerProperties) throws IOException, TimeoutException {
         Channel channel = newQueueChannel(queueName, queueProperties);
 
-        if (consumerParameters.getPrefetchCount() != null) {
-            channel.basicQos(consumerParameters.getPrefetchCount());
+        if (consumerProperties.getPrefetchCount() != null) {
+            channel.basicQos(consumerProperties.getPrefetchCount());
         }
         return channel;
     }
