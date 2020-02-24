@@ -3,7 +3,7 @@ package service;
 import com.rabbitmq.client.*;
 import config.RabbitMqConfig;
 import webSocket.ConsumerType;
-import webSocket.ProducerType;
+import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
 import java.io.IOException;
@@ -43,10 +43,10 @@ public class WebSocketService {
         return channel;
     }
 
-    public void publishMessage(Channel channel, String exchangeName, String queueName, ProducerType producerType, String message) throws IOException {
+    public void publishMessage(Channel channel, String exchangeName, String queueName, ProducerProperties producerProperties, String message) throws IOException {
         channel.basicPublish(exchangeName,
                              queueName,
-                             producerType.getMessageProperties(),
+                             producerProperties.getMessageProperties(),
                              message.getBytes(StandardCharsets.UTF_8));
     }
 

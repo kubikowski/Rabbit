@@ -3,7 +3,7 @@ package workQueues;
 import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
-import webSocket.ProducerType;
+import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
 import java.io.IOException;
@@ -18,14 +18,14 @@ public class NewTask {
         final String exchangeName = RabbitMqConfig.NULL_EXCHANGE_NAME;
         final String queueName = RabbitMqConfig.TASK_QUEUE_NAME;
         final QueueProperties queueProperties = RabbitMqConfig.DURABLE_QUEUE;
-        final ProducerType producerType = RabbitMqConfig.PERSISTENT_PRODUCER;
+        final ProducerProperties producerProperties = RabbitMqConfig.PERSISTENT_PRODUCER;
 
         final Channel channel = webSocketService.newQueueChannel(queueName, queueProperties);
         final Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
             String message = i + ".".repeat(random.nextInt(10));
-            webSocketService.publishMessage(channel, exchangeName, queueName, producerType, message);
+            webSocketService.publishMessage(channel, exchangeName, queueName, producerProperties, message);
             System.out.println(" [x] Sent '" + message + "'");
         }
     }
