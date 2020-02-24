@@ -24,14 +24,23 @@ public class WebSocketService {
     public Channel newQueueChannel(String queueName, QueueProperties queueProperties) throws IOException, TimeoutException {
         Channel channel = newChannel();
 
-        channel.queueDeclare(queueName, queueProperties.isDurable(), queueProperties.isExclusive(), queueProperties.isAutoDelete(), queueProperties.getArguments());
+        channel.queueDeclare(queueName,
+                             queueProperties.isDurable(),
+                             queueProperties.isExclusive(),
+                             queueProperties.isAutoDelete(),
+                             queueProperties.getArguments());
         return channel;
     }
 
     public Channel newExchangeChannel(String exchangeName, ExchangeProperties exchangeProperties) throws IOException, TimeoutException {
         Channel channel = newChannel();
 
-        channel.exchangeDeclare(exchangeName, exchangeProperties.getExchangeType());
+        channel.exchangeDeclare(exchangeName,
+                                exchangeProperties.getExchangeType(),
+                                exchangeProperties.isDurable(),
+                                exchangeProperties.isAutoDelete(),
+                                exchangeProperties.isInternal(),
+                                exchangeProperties.getArguments());
         return channel;
     }
 

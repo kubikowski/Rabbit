@@ -16,7 +16,7 @@ public class ReceiveLogs {
 
         final String exchangeName = RabbitMqConfig.LOGS_EXCHANGE_NAME;
         final String routingKey = RabbitMqConfig.DEFAULT_ROUTING_KEY;
-        final ExchangeProperties exchangeProperties = RabbitMqConfig.FANOUT_EXCHANGE;
+        final ExchangeProperties exchangeProperties = RabbitMqConfig.NON_DURABLE_FANOUT_EXCHANGE;
         final ConsumerProperties consumerProperties = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
 
         final Channel channel = webSocketService.newExchangeChannel(exchangeName, exchangeProperties);

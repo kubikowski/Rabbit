@@ -25,7 +25,8 @@ public class RabbitMqConfig {
     public static final QueueProperties DURABLE_QUEUE =       new QueueProperties(true, false, false, null);
 
     // Exchange Properties
-    public static final ExchangeProperties FANOUT_EXCHANGE =    new ExchangeProperties(BuiltinExchangeType.FANOUT);
+    public static final ExchangeProperties NON_DURABLE_FANOUT_EXCHANGE =    new ExchangeProperties(BuiltinExchangeType.FANOUT, false, false, false, null);
+    public static final ExchangeProperties DURABLE_FANOUT_EXCHANGE =        new ExchangeProperties(BuiltinExchangeType.FANOUT, true, false, false, null);
 
     // Producer Properties
     public static final ProducerProperties BASIC_PRODUCER =       new ProducerProperties(MessageProperties.MINIMAL_BASIC);
