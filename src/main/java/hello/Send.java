@@ -14,7 +14,7 @@ public class Send {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        final String exchangeName = RabbitMqConfig.NULL_EXCHANGE_NAME;
+        final String exchangeName = RabbitMqConfig.DEFAULT_EXCHANGE_NAME;
         final String queueName = RabbitMqConfig.HELLO_QUEUE_NAME;
         final QueueProperties queueProperties = RabbitMqConfig.NON_DURABLE_QUEUE;
         final ProducerProperties producerProperties = RabbitMqConfig.BASIC_PRODUCER;
