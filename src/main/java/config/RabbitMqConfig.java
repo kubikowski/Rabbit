@@ -1,8 +1,10 @@
 package config;
 
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
 import webSocket.ConsumerProperties;
+import webSocket.ExchangeProperties;
 import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
@@ -22,6 +24,9 @@ public class RabbitMqConfig {
     // Queue Properties
     public static final QueueProperties NON_DURABLE_QUEUE =   new QueueProperties(false, false, false, null);
     public static final QueueProperties DURABLE_QUEUE =       new QueueProperties(true, false, false, null);
+
+    // Exchange Properties
+    public static final ExchangeProperties FANOUT_EXCHANGE =    new ExchangeProperties(BuiltinExchangeType.FANOUT);
 
     // Producer Properties
     public static final ProducerProperties BASIC_PRODUCER =       new ProducerProperties(MessageProperties.MINIMAL_BASIC);

@@ -3,6 +3,7 @@ package service;
 import com.rabbitmq.client.*;
 import config.RabbitMqConfig;
 import webSocket.ConsumerProperties;
+import webSocket.ExchangeProperties;
 import webSocket.ProducerProperties;
 import webSocket.QueueProperties;
 
@@ -27,10 +28,10 @@ public class WebSocketService {
         return channel;
     }
 
-    public Channel newExchangeChannel(String exchangeName, BuiltinExchangeType builtinExchangeType) throws IOException, TimeoutException {
+    public Channel newExchangeChannel(String exchangeName, ExchangeProperties exchangeProperties) throws IOException, TimeoutException {
         Channel channel = newChannel();
 
-        channel.exchangeDeclare(exchangeName, builtinExchangeType);
+        channel.exchangeDeclare(exchangeName, exchangeProperties.getExchangeType());
         return channel;
     }
 
