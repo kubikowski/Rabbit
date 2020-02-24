@@ -14,12 +14,14 @@ public class ReceiveLogs {
     public static void main(String[] argv) throws IOException, TimeoutException {
         WebSocketService webSocketService = new WebSocketService();
 
-        ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
+        final String exchangeName = RabbitMqConfig.LOGS_EXCHANGE_NAME;
+        final String routingKey = RabbitMqConfig.NULL_ROUTING_KEY;
+        final ConsumerType consumerType = RabbitMqConfig.FIRE_AND_FORGET_CONSUMER;
 
-        final Channel channel = webSocketService.newExchangeChannel(RabbitMqConfig.LOGS_EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
+        final Channel channel = webSocketService.newExchangeChannel(exchangeName, BuiltinExchangeType.FANOUT);
 
-        String queueName = channel.queueDeclare().getQueue();
-        channel.queueBind(queueName, RabbitMqConfig.LOGS_EXCHANGE_NAME, RabbitMqConfig.NULL_ROUTING_KEY);
+        final String queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName, exchangeName, routingKey);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         channel.basicConsume(queueName, consumerType.isAutoAck(), webSocketService.defaultDeliverCallback, consumerTag -> { });
