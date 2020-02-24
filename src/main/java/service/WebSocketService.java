@@ -4,7 +4,7 @@ import com.rabbitmq.client.*;
 import config.RabbitMqConfig;
 import webSocket.ConsumerType;
 import webSocket.ProducerType;
-import webSocket.QueueType;
+import webSocket.QueueProperties;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,10 +20,10 @@ public class WebSocketService {
         return connection.createChannel();
     }
 
-    public Channel newQueueChannel(String queueName, QueueType queueType) throws IOException, TimeoutException {
+    public Channel newQueueChannel(String queueName, QueueProperties queueProperties) throws IOException, TimeoutException {
         Channel channel = newChannel();
 
-        channel.queueDeclare(queueName, queueType.isDurable(), queueType.isExclusive(), queueType.isAutoDelete(), queueType.getArguments());
+        channel.queueDeclare(queueName, queueProperties.isDurable(), queueProperties.isExclusive(), queueProperties.isAutoDelete(), queueProperties.getArguments());
         return channel;
     }
 
@@ -34,8 +34,8 @@ public class WebSocketService {
         return channel;
     }
 
-    public Channel newConsumerChannel(String queueName, QueueType queueType, ConsumerType consumerType) throws IOException, TimeoutException {
-        Channel channel = newQueueChannel(queueName, queueType);
+    public Channel newConsumerChannel(String queueName, QueueProperties queueProperties, ConsumerType consumerType) throws IOException, TimeoutException {
+        Channel channel = newQueueChannel(queueName, queueProperties);
 
         if (consumerType.getPrefetchCount() != null) {
             channel.basicQos(consumerType.getPrefetchCount());

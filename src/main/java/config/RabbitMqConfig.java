@@ -4,7 +4,7 @@ import com.rabbitmq.client.MessageProperties;
 import org.springframework.context.annotation.Configuration;
 import webSocket.ConsumerType;
 import webSocket.ProducerType;
-import webSocket.QueueType;
+import webSocket.QueueProperties;
 
 @Configuration
 public class RabbitMqConfig {
@@ -20,8 +20,8 @@ public class RabbitMqConfig {
     public static final String LOGS_EXCHANGE_NAME = "logs";
 
     // Queue Type Parameters
-    public static final QueueType NON_DURABLE_QUEUE =   new QueueType(false, false, false, null);
-    public static final QueueType DURABLE_QUEUE =       new QueueType(true, false, false, null);
+    public static final QueueProperties NON_DURABLE_QUEUE =   new QueueProperties(false, false, false, null);
+    public static final QueueProperties DURABLE_QUEUE =       new QueueProperties(true, false, false, null);
 
     // Producer Type Parameters
     public static final ProducerType BASIC_PRODUCER =       new ProducerType(MessageProperties.MINIMAL_BASIC);

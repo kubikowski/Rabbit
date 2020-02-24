@@ -6,7 +6,7 @@ import com.rabbitmq.client.Delivery;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ConsumerType;
-import webSocket.QueueType;
+import webSocket.QueueProperties;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -21,10 +21,10 @@ public class Worker {
         WebSocketService webSocketService = new WebSocketService();
 
         final String queueName = RabbitMqConfig.TASK_QUEUE_NAME;
-        final QueueType queueType = RabbitMqConfig.DURABLE_QUEUE;
+        final QueueProperties queueProperties = RabbitMqConfig.DURABLE_QUEUE;
         final ConsumerType consumerType = RabbitMqConfig.WORKER_CONSUMER;
 
-        final Channel channel = webSocketService.newConsumerChannel(queueName, queueType, consumerType);
+        final Channel channel = webSocketService.newConsumerChannel(queueName, queueProperties, consumerType);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             webSocketService.defaultDeliverCallback.handle(consumerTag, delivery);

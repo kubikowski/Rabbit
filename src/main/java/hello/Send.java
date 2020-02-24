@@ -4,7 +4,7 @@ import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ProducerType;
-import webSocket.QueueType;
+import webSocket.QueueProperties;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -16,10 +16,10 @@ public class Send {
 
         final String exchangeName = RabbitMqConfig.NULL_EXCHANGE_NAME;
         final String queueName = RabbitMqConfig.HELLO_QUEUE_NAME;
-        final QueueType queueType = RabbitMqConfig.NON_DURABLE_QUEUE;
+        final QueueProperties queueProperties = RabbitMqConfig.NON_DURABLE_QUEUE;
         final ProducerType producerType = RabbitMqConfig.BASIC_PRODUCER;
 
-        final Channel channel = webSocketService.newQueueChannel(queueName, queueType);
+        final Channel channel = webSocketService.newQueueChannel(queueName, queueProperties);
 
         String message = "Hello Java!";
         webSocketService.publishMessage(channel, exchangeName, queueName, producerType, message);

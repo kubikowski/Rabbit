@@ -4,7 +4,7 @@ import com.rabbitmq.client.Channel;
 import config.RabbitMqConfig;
 import service.WebSocketService;
 import webSocket.ProducerType;
-import webSocket.QueueType;
+import webSocket.QueueProperties;
 
 import java.io.IOException;
 import java.util.Random;
@@ -17,10 +17,10 @@ public class NewTask {
 
         final String exchangeName = RabbitMqConfig.NULL_EXCHANGE_NAME;
         final String queueName = RabbitMqConfig.TASK_QUEUE_NAME;
-        final QueueType queueType = RabbitMqConfig.DURABLE_QUEUE;
+        final QueueProperties queueProperties = RabbitMqConfig.DURABLE_QUEUE;
         final ProducerType producerType = RabbitMqConfig.PERSISTENT_PRODUCER;
 
-        final Channel channel = webSocketService.newQueueChannel(queueName, queueType);
+        final Channel channel = webSocketService.newQueueChannel(queueName, queueProperties);
         final Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
