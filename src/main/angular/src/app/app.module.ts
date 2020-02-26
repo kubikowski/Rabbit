@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 
 import { WebSocketService } from "./services/web-socket.service";
 import { ReceiveLogsComponent } from './components/receive-logs/receive-logs.component';
+import { SendComponent } from './components/hello/send/send.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReceiveLogsComponent,
+    SendComponent,
   ],
   imports: [
     BrowserModule,
