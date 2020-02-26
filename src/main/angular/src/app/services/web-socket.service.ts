@@ -1,9 +1,10 @@
-import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { Subscriptions, Subscription, MultiSubscription } from './web-socket-subscription.model';
 import { StompService } from './stomp.service';
 
+
 @Injectable({ providedIn: 'root' })
-export class WebSocketService implements OnInit, OnDestroy{
+export class WebSocketService implements OnInit, OnDestroy {
 
   readonly REGISTRATION_URL = "/ws-register";
   readonly notifiableMessageTimeout = 4500;
@@ -17,6 +18,8 @@ export class WebSocketService implements OnInit, OnDestroy{
   constructor(private stompService: StompService) { }
 
   ngOnInit(): void {
+    this.init();
+    console.log('initialised connection');
   }
 
   ngOnDestroy(): void {
