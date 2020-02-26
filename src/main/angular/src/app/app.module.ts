@@ -9,6 +9,7 @@ import { WebSocketService } from "./services/web-socket.service";
 
 import { ReceiveLogsComponent } from './components/receive-logs/receive-logs.component';
 import { SendComponent } from './components/hello/send/send.component';
+import { StompService } from "./services/stomp.service";
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import { SendComponent } from './components/hello/send/send.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     PromiseService,
+    StompService,
     WebSocketService,
   ],
   bootstrap: [AppComponent]
