@@ -11,7 +11,6 @@ export class ReceiveLogsComponent implements OnInit {
   constructor(private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
-    console.log(this.webSocketService.fetchData());
   }
 
 }

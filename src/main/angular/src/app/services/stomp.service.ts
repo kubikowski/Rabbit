@@ -15,7 +15,7 @@ export class StompService {
   constructor(private promiseService: PromiseService) { }
 
   setDebug(callback) {
-    this.debug = callback
+    this.debug = callback;
   }
 
   connect(endpoint, headers, errorCallback: (error: Error) => any, sockjsOpts?): Promise<any> {
@@ -28,7 +28,7 @@ export class StompService {
 
     this.sock.onclose = () => {
       if (errorCallback) {
-        errorCallback(new Error('Connection broken'))
+        errorCallback(new Error('Connection broken'));
       }
     };
 
@@ -50,7 +50,7 @@ export class StompService {
   disconnect(): Promise<any> {
     const deferred = this.promiseService.defer();
     this.stomp.disconnect(deferred.resolve);
-    return deferred.promise
+    return deferred.promise;
   }
 
   subscribe(destination, callback, headers?): SubscriptionLike {
@@ -74,16 +74,16 @@ export class StompService {
   send(destination, body, headers): Promise<any> {
     const deferred = this.promiseService.defer();
 
-        try {
-          const payloadJson = JSON.stringify(body);
-          headers = headers || {};
-          this.stomp.send(destination, headers, payloadJson);
-          deferred.resolve();
-        } catch (e) {
-          deferred.reject(e);
-        }
+    try {
+      const payloadJson = JSON.stringify(body);
+      headers = headers || {};
+      this.stomp.send(destination, headers, payloadJson);
+      deferred.resolve();
+    } catch (e) {
+      deferred.reject(e);
+    }
 
-        return deferred.promise;
+    return deferred.promise;
   }
 
 }
