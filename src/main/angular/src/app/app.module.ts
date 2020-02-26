@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { PromiseService } from "./services/promise.service";
 import { WebSocketService } from "./services/web-socket.service";
+
 import { ReceiveLogsComponent } from './components/receive-logs/receive-logs.component';
 import { SendComponent } from './components/hello/send/send.component';
 
@@ -19,6 +21,7 @@ import { SendComponent } from './components/hello/send/send.component';
     AppRoutingModule
   ],
   providers: [
+    PromiseService,
     WebSocketService,
   ],
   bootstrap: [AppComponent]
