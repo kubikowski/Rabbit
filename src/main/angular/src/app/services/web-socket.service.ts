@@ -36,17 +36,17 @@ export class WebSocketService implements OnInit, OnDestroy{
     return this.stompService.connect(this.REGISTRATION_URL, {}, this.disconnectErrorHandler.bind(this)).then(() => {
       this.connected = true;
       Object.entries<Subscription | MultiSubscription>(this.subscriptions)
-        .forEach(([subscriptionDestination, subscription]) => {
-          if (subscription instanceof MultiSubscription) {
-            Object.entries(subscription).forEach(([subscriptionKey, multiSubscription]) => {
-              if (typeof multiSubscription.callback !== 'undefined') {
-                this.multiSubscribe(subscriptionDestination, multiSubscription.callback, subscriptionKey);
-              }
-            });
-          } else {
-            this.subscribe(subscriptionDestination, subscription.callback);
-          }
-        });
+            .forEach(([subscriptionDestination, subscription]) => {
+        if (subscription instanceof MultiSubscription) {
+          Object.entries(subscription).forEach(([subscriptionKey, multiSubscription]) => {
+            if (typeof multiSubscription.callback !== 'undefined') {
+              this.multiSubscribe(subscriptionDestination, multiSubscription.callback, subscriptionKey);
+            }
+          });
+        } else {
+          this.subscribe(subscriptionDestination, subscription.callback);
+        }
+      });
     });
   }
 
@@ -107,12 +107,10 @@ export class WebSocketService implements OnInit, OnDestroy{
   multiSubscribe(subscriptionDestination: string, subscribeCallback: () => any, subscriptionKey: string): Promise<void> {
     const subscription = this.newSubscription(subscriptionDestination, subscribeCallback);
 
-    if (typeof this.subscriptions[subscriptionDestination] !== 'undefined') {
-      this.subscriptions[subscriptionDestination][subscriptionKey] = subscription;
-    } else {
+    if (typeof this.subscriptions[subscriptionDestination] === 'undefined') {
       this.subscriptions[subscriptionDestination] = new MultiSubscription();
-      this.subscriptions[subscriptionDestination][subscriptionKey] = subscription;
     }
+    this.subscriptions[subscriptionDestination][subscriptionKey] = subscription;
 
     return Promise.resolve();
   }
@@ -158,17 +156,16 @@ export class WebSocketService implements OnInit, OnDestroy{
 
   private unsubscribeAll() {
     Object.entries<Subscription | MultiSubscription>(this.subscriptions)
-      .forEach(([subscriptionDestination, subscription]) => {
-        if (subscription instanceof Subscription) {
-          this.unsubscribe(subscriptionDestination);
-        } else if (subscription instanceof MultiSubscription) {
-          Object.keys(subscription).forEach(subscriptionKey => {
-            this.multiUnsubscribe(subscriptionDestination, subscriptionKey);
-          });
-        } else {
-          console.warn('Unknown subscription type');
-          console.info({subscription});
-        }
-      });
+          .forEach(([subscriptionDestination, subscription]) => {
+      if (subscription instanceof Subscription) {
+        this.unsubscribe(subscriptionDestination);
+      } else if (subscription instanceof MultiSubscription) {
+        Object.keys(subscription)
+              .forEach(subscriptionKey => this.multiUnsubscribe(subscriptionDestination, subscriptionKey));
+      } else {
+        console.warn('Unknown subscription type');
+        console.info({subscription});
+      }
+    });
   }
 }
