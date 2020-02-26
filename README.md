@@ -17,3 +17,8 @@
  ```
  sudo rabbitmqctl list_exchanges
  ```
+
+ Listing Bindings between Sources (Exchanges) and Destinations (Queues):
+ ```
+ sudo rabbitmqctl list_bindings
+ ```
