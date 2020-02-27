@@ -1,21 +1,17 @@
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { StompService } from './stomp.service';
+import { WebSocketConfigService } from "./web-socket-config.service";
 import { Subscriptions, Subscription, MultiSubscription } from './web-socket-subscription.model';
-import { QueueName, ExchangeName } from './web-socket-config.enum';
 
 @Injectable({ providedIn: 'root' })
 export class WebSocketService implements OnInit, OnDestroy {
 
-  readonly REGISTRATION_URL = "/ws-register";
-  readonly notifiableMessageTimeout = 4500;
-  readonly maxReconnectAttempts = 20;
-
   connected = false;
   reconnectAttempts = 0;
-
   subscriptions: Subscriptions = {};
 
-  constructor(private stompService:StompService) { }
+  constructor(private stompService:StompService,
+              private webSocketConfig:WebSocketConfigService) { }
 
   ngOnInit(): void {
     this.init();
@@ -36,7 +32,7 @@ export class WebSocketService implements OnInit, OnDestroy {
   }
 
   private connect(): Promise<any> {
-    return this.stompService.connect(this.REGISTRATION_URL, {}, this.disconnectErrorHandler.bind(this)).then(() => {
+    return this.stompService.connect(this.webSocketConfig.REGISTRATION_URL, {}, this.disconnectErrorHandler.bind(this)).then(() => {
       this.connected = true;
       Object.entries<Subscription | MultiSubscription>(this.subscriptions)
             .forEach(([subscriptionDestination, subscription]) => {
@@ -56,7 +52,7 @@ export class WebSocketService implements OnInit, OnDestroy {
   private disconnectErrorHandler(error) {
     this.connected = false;
     this.reconnectAttempts++;
-    if (this.reconnectAttempts <= this.maxReconnectAttempts) {
+    if (this.reconnectAttempts <= this.webSocketConfig.maxReconnectAttempts) {
       setTimeout(() => {
         if (!this.connected) {
           this.connect();
@@ -64,6 +60,7 @@ export class WebSocketService implements OnInit, OnDestroy {
       }, 5000);
     } else {
       // this.notificationService.errorToastAndNotify("Server unreachable. Please contact your administrator.");
+      console.error('Server unreachable. Please contact your administrator.');
       this.clear();
     }
   }
@@ -89,9 +86,10 @@ export class WebSocketService implements OnInit, OnDestroy {
         connection = this.stompService.subscribe(subscriptionDestination, (response) => {
           if (response.notifiable) {
             // this.notificationService.infoToast(response.message);
+            console.error(response.message);
             setTimeout(() => {
               subscribeCallback(response.body);
-            }, this.notifiableMessageTimeout);
+            }, this.webSocketConfig.notifiableMessageTimeout);
           } else {
             subscribeCallback(response.body);
           }
