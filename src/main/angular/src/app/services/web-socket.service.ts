@@ -1,7 +1,7 @@
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
-import { Subscriptions, Subscription, MultiSubscription } from './web-socket-subscription.model';
 import { StompService } from './stomp.service';
-
+import { Subscriptions, Subscription, MultiSubscription } from './web-socket-subscription.model';
+import { QueueName, ExchangeName } from './web-socket-config.enum';
 
 @Injectable({ providedIn: 'root' })
 export class WebSocketService implements OnInit, OnDestroy {
@@ -15,7 +15,7 @@ export class WebSocketService implements OnInit, OnDestroy {
 
   subscriptions: Subscriptions = {};
 
-  constructor(private stompService: StompService) { }
+  constructor(private stompService:StompService) { }
 
   ngOnInit(): void {
     this.init();
