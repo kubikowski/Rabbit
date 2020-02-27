@@ -9,14 +9,16 @@ import { StompService } from "./services/stomp.service";
 import { WebSocketConfigService } from "./services/web-socket-config.service";
 import { WebSocketService } from "./services/web-socket.service";
 
-import { ReceiveLogsComponent } from './components/receive-logs/receive-logs.component';
 import { SendComponent } from './components/hello/send/send.component';
+import { ReceiveComponent } from './components/hello/receive/receive.component';
+import { ReceiveLogsComponent } from './components/receive-logs/receive-logs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReceiveLogsComponent,
     SendComponent,
+    ReceiveComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,8 +14,7 @@ export class WebSocketService implements OnInit, OnDestroy {
                 private webSocketConfig:WebSocketConfigService) { }
 
     ngOnInit(): void {
-        this.init()
-            .then(() => console.log('initialised connection'));
+        this.init();
     }
 
     ngOnDestroy(): void {
